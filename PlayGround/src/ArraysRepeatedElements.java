@@ -76,6 +76,7 @@ public class ArraysRepeatedElements {
         System.out.print("Repeating elements are ");
         System.out.println(x + " " + y + " using XOR");
     }
+    
 
     public static void repeatedElementsUsingArrayIndex(int[] nums, int n) {
         System.out.print("Repeated elements found using Array Index are :");
