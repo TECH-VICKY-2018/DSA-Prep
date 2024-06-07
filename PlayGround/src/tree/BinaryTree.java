@@ -1,21 +1,8 @@
 package tree;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class BinaryTree {
-
-    // Definition for a binary tree node.
-    static class Node {
-        int data;
-        Node left, right;
-
-        Node(int item) {
-            data = item;
-            left = right = null;
-        }
-    }
 
     // Method to perform level-order traversal
     public static void levelOrder(Node root) {
@@ -28,7 +15,7 @@ public class BinaryTree {
 
         while (!Q.isEmpty()) {
             Node curr = Q.poll();
-            System.out.print(curr.data + " ");
+            System.out.print(curr.val + " ");
 
             if (curr.left != null) {
                 Q.add(curr.left);
@@ -41,13 +28,46 @@ public class BinaryTree {
         System.out.println();
     }
 
+    // Method to perform enhanced level-order traversal
+    public static ArrayList<ArrayList<Integer>> enhancedLevelOrder(Node root) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        Queue<Node> Q = new ArrayDeque<>();
+        Q.add(root);
+
+        while (!Q.isEmpty()) {
+            int levelSize = Q.size();
+            ArrayList<Integer> currentLevel = new ArrayList<>();
+
+            for (int i = 0; i < levelSize; i++) {
+                Node curr = Q.poll();
+                currentLevel.add(curr.val);
+
+                if (curr.left != null) {
+                    Q.add(curr.left);
+                }
+
+                if (curr.right != null) {
+                    Q.add(curr.right);
+                }
+            }
+
+            result.add(currentLevel);
+        }
+
+        return result;
+    }
+
     // Method to perform pre-order traversal
     public static void preOrder(Node root) {
         if (root == null) {
             return;
         }
 
-        System.out.print(root.data + " ");
+        System.out.print(root.val + " ");
         preOrder(root.left);
         preOrder(root.right);
     }
@@ -59,7 +79,7 @@ public class BinaryTree {
         }
 
         inOrder(root.left);
-        System.out.print(root.data + " ");
+        System.out.print(root.val + " ");
         inOrder(root.right);
     }
 
@@ -71,7 +91,7 @@ public class BinaryTree {
 
         postOrder(root.left);
         postOrder(root.right);
-        System.out.print(root.data + " ");
+        System.out.print(root.val + " ");
     }
 
     // Helper method to create a sample binary tree
@@ -96,16 +116,20 @@ public class BinaryTree {
         Node root = createTree();
         Scanner scanner = new Scanner(System.in);
 
+        ZigZag zigZag = new ZigZag();
+
         while (true) {
             System.out.println("Enter the type of traversal you want to perform:");
             System.out.println("1. Level Order");
             System.out.println("2. Pre Order");
             System.out.println("3. In Order");
             System.out.println("4. Post Order");
-            System.out.println("5. Stop");
+            System.out.println("5. Enhanced Level Order");
+            System.out.println("6. Zig Zag Level Order");
+            System.out.println("7. Stop");
             int choice = scanner.nextInt();
 
-            if (choice == 5) {
+            if (choice == 7) {
                 break;
             }
 
@@ -128,6 +152,20 @@ public class BinaryTree {
                     System.out.println("Post-order traversal of binary tree:");
                     postOrder(root);
                     System.out.println();
+                    break;
+                case 5:
+                    System.out.println("Enhanced level order traversal of binary tree:");
+                    ArrayList<ArrayList<Integer>> levels = enhancedLevelOrder(root);
+                    for (ArrayList<Integer> level : levels) {
+                        System.out.print(level+" ");
+                    }
+                    break;
+                case 6:
+                    System.out.println("Zig Zag traversal of binary tree:");
+                    List<List<Integer>> zigZagLvl = zigZag.zigzagLevelOrder(root);
+                    for (List<Integer> level : zigZagLvl) {
+                        System.out.print(level+" ");
+                    }
                     break;
                 default:
                     System.out.println("Invalid choice, please try again.");
