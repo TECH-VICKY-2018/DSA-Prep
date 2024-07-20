@@ -61,7 +61,7 @@ public class SurroundedRegions {
                     board[row][col] = 'X';
                 }
             }
-        }
+        }   
 
     }
 
