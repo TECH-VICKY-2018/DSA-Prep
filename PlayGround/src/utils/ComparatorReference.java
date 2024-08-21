@@ -59,7 +59,7 @@ public class ComparatorReference {
         students.add(new Student("vicky", 23));
         students.add(new Student("vicky", 21));
         students.add(new Student("vy", 24));
-        students.add(new Student("ba", 3));
+        students.add(new Student("ba", 30));
         students.add(new Student("sba", 13));
         students.add(new Student("shba", 20));
 

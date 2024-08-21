@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class UnionSortedArray {
 
-    private static int nextDistinct(int[] nums, int currIndex, int size) {
+    private int nextDistinct(int[] nums, int currIndex, int size) {
 
         while (currIndex < size - 1 && nums[currIndex] == nums[currIndex + 1]) {
             currIndex++;
@@ -18,11 +18,11 @@ public class UnionSortedArray {
 
     }
 
-    public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m) {
+    public int[] unionArray(int[] arr1, int[] arr2) {
         // add your code here
         ArrayList<Integer> unionResult = new ArrayList<>();
-        int i = 0;
-        int j = 0;
+        int i = 0, n = arr1.length;
+        int j = 0, m = arr2.length;
 
         while (i < n && j < m) {
 
@@ -50,7 +50,14 @@ public class UnionSortedArray {
             j = nextDistinct(arr2, j, m);
         }
 
-        return unionResult;
+        int[] unionArray = new int[unionResult.size()];
+
+        for (int x = 0; x < unionResult.size(); x++) {
+            unionArray[x] = unionResult.get(x);
+        }
+
+
+        return unionArray;
     }
 
     public static void main(String[] args) {
@@ -59,8 +66,9 @@ public class UnionSortedArray {
         int[] arr1 = {-8, -3, -3, -2, 0, 1, 2, 2, 6};
         int[] arr2 = {-9, -8, -3, -2, 0, 1, 2, 6};
 
-        List<Integer> res = obj.findUnion(arr1, arr2, arr1.length, arr2.length);
+        int[] res = obj.unionArray(arr1, arr2);
 
+        System.out.println(Arrays.toString(res));
 
         Arrays.stream(arr1).forEach((int x) -> {
             System.out.println(x + " ");
