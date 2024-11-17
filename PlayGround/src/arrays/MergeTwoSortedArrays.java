@@ -27,8 +27,11 @@ public class MergeTwoSortedArrays {
             if (gap == 1) break;
             gap = gap / 2 + gap % 2;
         }
+        System.arraycopy(nums2, 0, nums1, m, n);
 
-        if (len - m >= 0) System.arraycopy(nums2, 0, nums1, m, len - m);
+//        for (int i = m; i < len; i++) {
+//            nums1[i] = nums2[i - m];
+//        }
 
     }
 

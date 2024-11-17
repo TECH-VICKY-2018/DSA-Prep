@@ -69,14 +69,34 @@ public class SingleElement {
         return -1;
     }
 
+    public static int secondLargestElement(int[] nums) {
+        int n = nums.length;
+        int first = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+
+        for (int num : nums) {
+            if (num > first) {
+                second = first;
+                first = num;
+            } else if (num > second && num != first) {
+                second = num;
+            }
+        }
+
+        if (second != Integer.MIN_VALUE) return second;
+        else return -1;
+    }
+
     public static void main(String[] args) {
         List<Integer> arr = Arrays.asList(1001, 1001, 1009, 6, 1111, 1111, 1, 1, 3, 3, 1009, 8, 8);
         int n = 5;
         int[] num = {1001, 1001, 1009, 6, 1111, 1111, 1, 1, 3, 3, 1009, 8, 8};
+        int[] num1 = {10, 10, 10, 10, 10};
 
-        System.out.println(singlelement(n, arr));
-        System.out.println("xor : " + singleElementXor(n, num));
-        System.out.println("map : " + singleNumberMap(num));
+//        System.out.println(singlelement(n, arr));
+//        System.out.println("xor : " + singleElementXor(n, num));
+//        System.out.println("map : " + singleNumberMap(num));
+        System.out.println("2nd lrgst : " + secondLargestElement(num1));
 
     }
 }
